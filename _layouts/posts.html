@@ -19,7 +19,58 @@ layout: default
 
 <p id="no-results" aria-live="polite" role="status">Nenhuma publicação encontrada.</p>
 
+<!-- Paginated posts (visible by default) -->
 <div id="posts-list">
+{% for post in paginator.posts %}
+  <article class="post-card">
+    <div class="post-meta">
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d %b %Y" }}</time>
+      {% assign words = post.content | number_of_words %}
+      {% assign minutes = words | divided_by: 200 %}
+      {% if minutes < 1 %}{% assign minutes = 1 %}{% endif %}
+      <span class="reading-time">{{ minutes }} min de leitura</span>
+    </div>
+    <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+    {% if post.description %}
+    <p class="post-excerpt">{{ post.description }}</p>
+    {% elsif post.excerpt %}
+    <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 35 }}</p>
+    {% endif %}
+    <a class="read-more" href="{{ post.url | relative_url }}">Ler mais →</a>
+  </article>
+{% endfor %}
+</div>
+
+<!-- Pagination nav -->
+{% if paginator.total_pages > 1 %}
+<nav class="pagination" aria-label="Paginação">
+  {% if paginator.previous_page %}
+  <a href="{{ paginator.previous_page_path | relative_url }}" aria-label="Página anterior">&laquo; Anterior</a>
+  {% else %}
+  <span class="disabled">&laquo; Anterior</span>
+  {% endif %}
+
+  {% for page_num in (1..paginator.total_pages) %}
+    {% if page_num == paginator.page %}
+    <span class="current" aria-current="page">{{ page_num }}</span>
+    {% elsif page_num == 1 %}
+    <a href="{{ paginator.first_page_path | relative_url }}">{{ page_num }}</a>
+    {% else %}
+    {% assign page_path = '/posts/page/' | append: page_num | append: '/' %}
+    <a href="{{ page_path | relative_url }}">{{ page_num }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if paginator.next_page %}
+  <a href="{{ paginator.next_page_path | relative_url }}" aria-label="Próxima página">Seguinte &raquo;</a>
+  {% else %}
+  <span class="disabled">Seguinte &raquo;</span>
+  {% endif %}
+</nav>
+{% endif %}
+
+<!-- All posts (hidden, used by search) -->
+<div id="all-posts-list" style="display:none">
 {% for post in site.posts %}
   <article
     class="post-card"
@@ -27,6 +78,10 @@ layout: default
   >
     <div class="post-meta">
       <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d %b %Y" }}</time>
+      {% assign words = post.content | number_of_words %}
+      {% assign minutes = words | divided_by: 200 %}
+      {% if minutes < 1 %}{% assign minutes = 1 %}{% endif %}
+      <span class="reading-time">{{ minutes }} min de leitura</span>
     </div>
     <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
     {% if post.description %}

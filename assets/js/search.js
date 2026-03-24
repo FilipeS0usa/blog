@@ -1,27 +1,45 @@
 // Client-side search for the posts page
-// Works with data attributes injected by Jekyll on each .post-card element
+// Toggles between paginated view and full search results
 
 (function () {
   var input = document.getElementById('search-input');
-  var cards = document.querySelectorAll('.post-card[data-searchable]');
+  var paginatedList = document.getElementById('posts-list');
+  var allPostsList = document.getElementById('all-posts-list');
+  var paginationNav = document.querySelector('.pagination');
   var noResults = document.getElementById('no-results');
 
-  if (!input) return;
+  if (!input || !allPostsList) return;
+
+  var cards = allPostsList.querySelectorAll('.post-card[data-searchable]');
 
   function normalize(str) {
     return str
       .toLowerCase()
       .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, ''); // strip diacritics for better matching
+      .replace(/[\u0300-\u036f]/g, '');
   }
 
   function filter() {
     var query = normalize(input.value.trim());
-    var visible = 0;
 
+    if (!query) {
+      // No query: show paginated view
+      paginatedList.style.display = '';
+      allPostsList.style.display = 'none';
+      if (paginationNav) paginationNav.style.display = '';
+      if (noResults) noResults.style.display = 'none';
+      return;
+    }
+
+    // Active search: hide pagination, show all posts filtered
+    paginatedList.style.display = 'none';
+    allPostsList.style.display = '';
+    if (paginationNav) paginationNav.style.display = 'none';
+
+    var visible = 0;
     cards.forEach(function (card) {
       var text = normalize(card.dataset.searchable);
-      var match = !query || text.includes(query);
+      var match = text.includes(query);
       card.style.display = match ? '' : 'none';
       if (match) visible++;
     });
@@ -31,7 +49,6 @@
     }
   }
 
-  // Debounce: 150ms delay
   var timer;
   function debouncedFilter() {
     clearTimeout(timer);
