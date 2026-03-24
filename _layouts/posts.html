@@ -11,13 +11,13 @@ layout: default
   <input
     id="search-input"
     type="search"
-    placeholder="Pesquisar publicações…"
+    placeholder="Pesquisar publicações… ( / )"
     aria-label="Pesquisar publicações"
     autocomplete="off"
   />
 </div>
 
-<p id="no-results">Nenhuma publicação encontrada.</p>
+<p id="no-results" aria-live="polite" role="status">Nenhuma publicação encontrada.</p>
 
 <div id="posts-list">
 {% for post in site.posts %}
