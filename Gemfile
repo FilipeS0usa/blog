@@ -3,7 +3,6 @@ source "https://rubygems.org"
 gem "jekyll", "~> 4.3"
 gem "jekyll-feed", "~> 0.17"
 gem "jekyll-seo-tag", "~> 2.8"
-gem "jekyll-paginate-v2", "~> 3.0"
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
 # and associated library.
