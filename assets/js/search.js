@@ -2,9 +2,9 @@
 // Works with data attributes injected by Jekyll on each .post-card element
 
 (function () {
-  const input = document.getElementById('search-input');
-  const cards = document.querySelectorAll('.post-card[data-searchable]');
-  const noResults = document.getElementById('no-results');
+  var input = document.getElementById('search-input');
+  var cards = document.querySelectorAll('.post-card[data-searchable]');
+  var noResults = document.getElementById('no-results');
 
   if (!input) return;
 
@@ -16,12 +16,12 @@
   }
 
   function filter() {
-    const query = normalize(input.value.trim());
-    let visible = 0;
+    var query = normalize(input.value.trim());
+    var visible = 0;
 
     cards.forEach(function (card) {
-      const text = normalize(card.dataset.searchable);
-      const match = !query || text.includes(query);
+      var text = normalize(card.dataset.searchable);
+      var match = !query || text.includes(query);
       card.style.display = match ? '' : 'none';
       if (match) visible++;
     });
@@ -31,5 +31,24 @@
     }
   }
 
-  input.addEventListener('input', filter);
+  // Debounce: 150ms delay
+  var timer;
+  function debouncedFilter() {
+    clearTimeout(timer);
+    timer = setTimeout(filter, 150);
+  }
+
+  input.addEventListener('input', debouncedFilter);
+
+  // "/" keyboard shortcut to focus search
+  document.addEventListener('keydown', function (e) {
+    if (
+      e.key === '/' &&
+      document.activeElement.tagName !== 'INPUT' &&
+      document.activeElement.tagName !== 'TEXTAREA'
+    ) {
+      e.preventDefault();
+      input.focus();
+    }
+  });
 })();

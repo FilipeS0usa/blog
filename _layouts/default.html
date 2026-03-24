@@ -9,45 +9,27 @@
   <meta name="description" content="{{ page.description | default: site.description }}" />
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}" />
   {% seo %}
-  <!-- Google Translate -->
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement(
-        {
-          pageLanguage: 'pt',
-          includedLanguages: 'en,es,fr,de',
-          layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-          autoDisplay: false
-        },
-        'google_translate_element'
-      );
-    }
-  </script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Saltar para o conteúdo</a>
   <div class="site-wrapper">
     <header class="site-header">
       <nav>
         <a href="{{ '/' | relative_url }}" class="site-title">{{ site.title }}</a>
         <ul class="nav-links">
-          <li><a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Início</a></li>
-          <li><a href="{{ '/posts/' | relative_url }}" {% if page.url == '/posts/' %}class="active"{% endif %}>Publicações</a></li>
+          <li><a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active" aria-current="page"{% endif %}>Início</a></li>
+          <li><a href="{{ '/posts/' | relative_url }}" {% if page.url == '/posts/' %}class="active" aria-current="page"{% endif %}>Publicações</a></li>
         </ul>
       </nav>
     </header>
 
-    <main>
+    <main id="main-content" tabindex="-1">
       {{ content }}
     </main>
   </div>
 
   <footer class="site-footer">
     <p>© {{ 'now' | date: '%Y' }} {{ site.title }}</p>
-    <div class="translate-wrap">
-      <div id="google_translate_element"></div>
-    </div>
   </footer>
-
-  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
