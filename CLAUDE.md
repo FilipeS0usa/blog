@@ -38,3 +38,35 @@ The `baseurl` is `/blog` — all asset and link paths must use `| relative_url` 
 ## CI
 
 GitHub Actions workflow (`.github/workflows/ci.yml`) runs `bundle exec jekyll build` on PRs to `main` using Ruby 3.3.
+
+## Branch Naming Conventions
+
+All branches must follow the pattern `<type>/<short-description>`, where words in the description are separated by hyphens (`-`). Keep descriptions lowercase and concise.
+
+| Type | Pattern | When to use |
+|---|---|---|
+| `feature` | `feature/<description>` | New blog features — new layouts, new UI components, new site sections |
+| `fix` | `fix/<description>` | Non-urgent bug fixes — broken links, styling issues, incorrect config |
+| `post` | `post/<slug>` | Adding or editing a blog post; use the intended post slug as description |
+| `hotfix` | `hotfix/<description>` | Urgent production fixes that must be merged immediately |
+| `chore` | `chore/<description>` | Maintenance tasks — dependency bumps, CI changes, repo configuration |
+| `refactor` | `refactor/<description>` | Code clean-up or restructuring with no functional change |
+
+**Examples:**
+
+```
+feature/dark-mode-toggle
+feature/post-tags
+fix/broken-nav-links
+fix/rss-feed-encoding
+post/2026-04-analgesia-em-versos
+hotfix/missing-baseurl-in-sitemap
+chore/bump-jekyll-4-4
+refactor/extract-head-partial
+```
+
+**Rules:**
+- Always branch off `main`.
+- Open a pull request back to `main`; CI must pass before merging.
+- Delete the branch after it is merged.
+- Never commit directly to `main`.
