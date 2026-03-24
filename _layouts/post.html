@@ -1,0 +1,37 @@
+---
+layout: default
+---
+<article>
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d %b %Y" }}</time>
+    </div>
+    <h1>{{ page.title }}</h1>
+    {% if page.description %}
+    <p class="post-description">{{ page.description }}</p>
+    {% endif %}
+  </header>
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+  <nav class="post-nav">
+    <div class="prev">
+      {% if page.previous.url %}
+      <a href="{{ page.previous.url | relative_url }}">
+        <span class="label">← Anterior</span>
+        {{ page.previous.title }}
+      </a>
+      {% endif %}
+    </div>
+    <div class="next">
+      {% if page.next.url %}
+      <a href="{{ page.next.url | relative_url }}">
+        <span class="label">Seguinte →</span>
+        {{ page.next.title }}
+      </a>
+      {% endif %}
+    </div>
+  </nav>
+</article>

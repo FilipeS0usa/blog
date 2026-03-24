@@ -1,0 +1,26 @@
+title: "Notas de um Analgésico"
+description: "Um espaço para tirar as coisas de dentro."
+baseurl: ""
+url: "https://filipes0usa.github.io"
+lang: pt
+
+# Build settings
+markdown: kramdown
+theme: null
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Allow future-dated posts to show
+future: true
+
+# Collections
+permalink: /posts/:year/:month/:day/:title/
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .bundle
