@@ -1,16 +1,14 @@
 // Client-side search for the posts page
-// Toggles between paginated view and full search results
+// Filters the single post list by query
 
 (function () {
   var input = document.getElementById('search-input');
-  var paginatedList = document.getElementById('posts-list');
-  var allPostsList = document.getElementById('all-posts-list');
-  var paginationNav = document.querySelector('.pagination');
+  var postsList = document.getElementById('posts-list');
   var noResults = document.getElementById('no-results');
 
-  if (!input || !allPostsList) return;
+  if (!input || !postsList) return;
 
-  var cards = allPostsList.querySelectorAll('.post-card[data-searchable]');
+  var cards = postsList.querySelectorAll('.post-card[data-searchable]');
 
   function normalize(str) {
     return str
@@ -23,18 +21,12 @@
     var query = normalize(input.value.trim());
 
     if (!query) {
-      // No query: show paginated view
-      paginatedList.style.display = '';
-      allPostsList.style.display = 'none';
-      if (paginationNav) paginationNav.style.display = '';
+      cards.forEach(function (card) {
+        card.style.display = '';
+      });
       if (noResults) noResults.style.display = 'none';
       return;
     }
-
-    // Active search: hide pagination, show all posts filtered
-    paginatedList.style.display = 'none';
-    allPostsList.style.display = '';
-    if (paginationNav) paginationNav.style.display = 'none';
 
     var visible = 0;
     cards.forEach(function (card) {
