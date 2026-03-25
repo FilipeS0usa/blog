@@ -39,7 +39,6 @@ Key features:
 - Live reload during development -- changes appear in the browser automatically
 - RSS feed via `jekyll-feed`
 - SEO metadata via `jekyll-seo-tag`
-- Google Translate widget for multilingual access
 
 ## Tech Stack
 
