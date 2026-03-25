@@ -7,7 +7,7 @@
   --surface: #141416;
   --text: #e0e0e0;
   --text-bright: #f0f0f0;
-  --muted: #6b6b76;
+  --muted: #7e7e8a;
   --accent: #c9a55a;
   --accent-hover: #d4b36e;
   --accent-dim: rgba(201, 165, 90, 0.08);
@@ -123,6 +123,13 @@ html {
   gap: 0.75rem;
 }
 
+.site-title-heading {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  margin: 0;
+}
+
 .site-title {
   font-size: 1rem;
   font-weight: 600;
@@ -179,7 +186,7 @@ html {
   padding: 2rem 1.5rem;
   width: 100%;
   border-top: 1px solid var(--border);
-  margin-top: 4rem;
+  margin-top: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -202,22 +209,63 @@ html {
   font-size: 0.95rem;
 }
 
-.latest-label {
+.home-tagline {
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-style: italic;
+  margin-bottom: 2.5rem;
+}
+
+.home-section {
+  margin-bottom: 2rem;
+}
+
+.home-section + .home-section {
+  padding-top: 2rem;
+}
+
+.section-label {
   font-size: 0.75rem;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--accent);
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.875rem;
+}
+
+.post-card--intro {
+  background: rgba(201, 165, 90, 0.1);
+  border: 1px solid rgba(201, 165, 90, 0.15);
+  border-left: 2px solid var(--accent);
+}
+
+.post-card--intro:hover {
+  background: rgba(201, 165, 90, 0.14);
+  border-color: var(--accent);
 }
 
 .all-posts-link {
-  margin-top: 1rem;
-  font-size: 0.85rem;
+  margin-top: 2rem;
+}
+
+.all-posts-link .read-more {
+  display: inline-block;
+  font-size: 0.88rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.all-posts-link .read-more:hover {
+  border-color: var(--accent);
+  background: var(--accent-dim);
 }
 
 /* ── Post card (used on home + list) ── */
 .post-card {
+  position: relative;
   margin-bottom: 2rem;
   padding: 1.25rem;
   border-radius: 6px;
@@ -234,13 +282,39 @@ html {
   margin-top: 0.5rem;
 }
 
+/* Stretched link — makes the entire card clickable via the heading link */
+.post-card h2 a::after,
+.post-card h3 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.post-card .read-more {
+  position: relative;
+  z-index: 1;
+}
+
 .post-meta {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
   font-size: 0.8rem;
   color: var(--muted);
   margin-bottom: 0.5rem;
+}
+
+.post-author {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.post-author::after {
+  content: "·";
+  margin-left: 0.75rem;
+  color: var(--muted);
+  font-weight: 400;
 }
 
 .reading-time::before {
@@ -248,21 +322,25 @@ html {
   margin-right: 0.75rem;
 }
 
-.post-card h2 {
+.post-card h2,
+.post-card h3 {
   font-size: 1.3rem;
   font-weight: 600;
   line-height: 1.35;
   letter-spacing: -0.01em;
   margin-bottom: 0.5rem;
+  overflow-wrap: break-word;
 }
 
-.post-card h2 a {
+.post-card h2 a,
+.post-card h3 a {
   color: var(--text-bright);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.post-card h2 a:hover {
+.post-card:hover h2 a,
+.post-card:hover h3 a {
   color: var(--accent);
 }
 
@@ -271,6 +349,10 @@ html {
   font-size: 0.93rem;
   line-height: 1.6;
   margin-bottom: 0.75rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .read-more {

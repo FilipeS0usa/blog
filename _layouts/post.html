@@ -4,6 +4,7 @@ layout: default
 <article>
   <header class="post-header">
     <div class="post-meta">
+      <span class="post-author">{{ page.author | default: site.author }}</span>
       <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d %b %Y" }}</time>
       {% assign words = content | number_of_words %}
       {% assign minutes = words | divided_by: 200 %}

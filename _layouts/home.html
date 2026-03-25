@@ -2,28 +2,64 @@
 layout: default
 ---
 {% assign latest = site.posts | first %}
+{% assign intro = site.posts | where: "pinned", true | first %}
 
 {% if latest %}
-<p class="latest-label">Última publicação</p>
 
-<article class="post-card">
-  <div class="post-meta">
-    <time datetime="{{ latest.date | date_to_xmlschema }}">{{ latest.date | date: "%d %b %Y" }}</time>
-    {% assign words = latest.content | number_of_words %}
-    {% assign minutes = words | divided_by: 200 %}
-    {% if minutes < 1 %}{% assign minutes = 1 %}{% endif %}
-    <span class="reading-time">{{ minutes }} min de leitura</span>
-  </div>
-  <h2><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></h2>
-  {% if latest.description %}
-  <p class="post-excerpt">{{ latest.description }}</p>
-  {% elsif latest.excerpt %}
-  <p class="post-excerpt">{{ latest.excerpt | strip_html | truncatewords: 40 }}</p>
-  {% endif %}
-  <a class="read-more" href="{{ latest.url | relative_url }}">Ler mais →</a>
-</article>
+<p class="home-tagline">{{ site.description }}</p>
 
-{% if site.posts.size > 1 %}
+{%- comment -%} ── Intro / pinned post (always visible) ── {%- endcomment -%}
+{% if intro %}
+<section class="home-section" aria-labelledby="section-intro">
+  <h2 id="section-intro" class="section-label">Introdução</h2>
+  <article class="post-card post-card--intro">
+    <div class="post-meta">
+      <span class="post-author">{{ intro.author | default: site.author }}</span>
+      <time datetime="{{ intro.date | date_to_xmlschema }}">{{ intro.date | date: "%d %b %Y" }}</time>
+      {% assign intro_words = intro.content | number_of_words %}
+      {% assign intro_minutes = intro_words | divided_by: 200 %}
+      {% if intro_minutes < 1 %}{% assign intro_minutes = 1 %}{% endif %}
+      <span class="reading-time">{{ intro_minutes }} min de leitura</span>
+    </div>
+    <h3><a href="{{ intro.url | relative_url }}">{{ intro.title }}</a></h3>
+    {% if intro.description %}
+    <p class="post-excerpt">{{ intro.description }}</p>
+    {% elsif intro.excerpt %}
+    <p class="post-excerpt">{{ intro.excerpt | strip_html | truncatewords: 40 }}</p>
+    {% endif %}
+    <a class="read-more" href="{{ intro.url | relative_url }}" aria-label="Ler mais sobre: {{ intro.title }}">Ler mais →</a>
+  </article>
+</section>
+{% endif %}
+
+{%- comment -%} ── Recent posts (up to 3, excluding pinned) ── {%- endcomment -%}
+{% assign recent = site.posts | where_exp: "post", "post.pinned != true" %}
+{% if recent.size > 0 %}
+<section class="home-section" aria-labelledby="section-recent">
+  <h2 id="section-recent" class="section-label">Publicações recentes</h2>
+  {% for post in recent limit:3 %}
+  <article class="post-card">
+    <div class="post-meta">
+      <span class="post-author">{{ post.author | default: site.author }}</span>
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d %b %Y" }}</time>
+      {% assign words = post.content | number_of_words %}
+      {% assign minutes = words | divided_by: 200 %}
+      {% if minutes < 1 %}{% assign minutes = 1 %}{% endif %}
+      <span class="reading-time">{{ minutes }} min de leitura</span>
+    </div>
+    <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+    {% if post.description %}
+    <p class="post-excerpt">{{ post.description }}</p>
+    {% elsif post.excerpt %}
+    <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 40 }}</p>
+    {% endif %}
+    <a class="read-more" href="{{ post.url | relative_url }}" aria-label="Ler mais sobre: {{ post.title }}">Ler mais →</a>
+  </article>
+  {% endfor %}
+</section>
+{% endif %}
+
+{% if recent.size > 3 %}
 <p class="all-posts-link">
   <a href="{{ '/posts/' | relative_url }}" class="read-more">Ver todas as publicações →</a>
 </p>

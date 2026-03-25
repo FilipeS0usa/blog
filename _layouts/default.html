@@ -18,7 +18,11 @@
   <div class="site-wrapper">
     <header class="site-header">
       <nav>
+        {% if page.layout == 'home' %}
+        <h1 class="site-title-heading"><a href="{{ '/' | relative_url }}" class="site-title">{{ site.title }}</a></h1>
+        {% else %}
         <a href="{{ '/' | relative_url }}" class="site-title">{{ site.title }}</a>
+        {% endif %}
         <ul class="nav-links">
           <li><a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active" aria-current="page"{% endif %}>Início</a></li>
           <li><a href="{{ '/posts/' | relative_url }}" {% if page.url == '/posts/' %}class="active" aria-current="page"{% endif %}>Publicações</a></li>
