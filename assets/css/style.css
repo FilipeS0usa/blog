@@ -199,6 +199,24 @@ html {
   color: var(--muted);
 }
 
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-socials a {
+  color: var(--muted);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.footer-socials a:hover {
+  color: var(--accent);
+}
+
 /* ── Home / latest post ── */
 .home-intro {
   margin-bottom: 3rem;
