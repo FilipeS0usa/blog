@@ -5,6 +5,11 @@ url: "https://filipes0usa.github.io"
 lang: pt
 author: "FilipeS0usa"
 
+# Social links
+social:
+  linkedin: "https://www.linkedin.com/in/filipes0usa"
+  github: "https://github.com/FilipeS0usa"
+
 # Build settings
 markdown: kramdown
 theme: null
