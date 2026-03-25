@@ -8,9 +8,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@a4effe49ee3ee5b8916cc18e1e0f6b64a8501e64 # v1.244.0
         with:
           ruby-version: '3.3'
           bundler-cache: true
