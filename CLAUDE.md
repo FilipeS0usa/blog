@@ -20,19 +20,20 @@ The `baseurl` is `/blog` — all asset and link paths must use `| relative_url` 
 
 **No gem theme.** All layouts chain from `_layouts/default.html`:
 - `default.html` — base shell (head, header nav, footer, Google Translate widget)
-- `home.html` — shows latest post only (index page)
+- `home.html` — pinned intro post + up to 3 recent posts (index page)
 - `posts.html` — lists all posts with client-side search via `assets/js/search.js`
 - `post.html` — single post with prev/next navigation
 
 **Styling:** Single vanilla CSS file at `assets/css/style.css` using CSS custom properties (dark theme, `--accent: #c9a55a`). No preprocessor.
 
-**Posts:** Standard Jekyll `_posts/` with `layout: post`. Front matter uses `title`, `date`, `description`. Permalink pattern: `/posts/:year/:month/:day/:title/`.
+**Posts:** Standard Jekyll `_posts/` with `layout: post`. Front matter uses `title`, `date`, `description`. Optional: `pinned: true` (pins to home page intro section), `author` (overrides site default). Permalink pattern: `/posts/:year/:month/:day/:title/`.
 
 **Search:** Client-side filtering on the posts page using `data-searchable` attributes injected by Jekyll at build time. Strips diacritics for Portuguese text matching.
 
 **Config notes:**
 - `future: true` — future-dated posts are published (intentional)
 - `lang: pt` — Portuguese language throughout; UI strings in templates are hardcoded in Portuguese
+- `author: "FilipeS0usa"` — default author for all posts; override per-post via front matter
 - Plugins: `jekyll-feed`, `jekyll-seo-tag`
 
 ## CI

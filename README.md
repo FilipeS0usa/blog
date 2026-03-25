@@ -117,7 +117,7 @@ The site will be available at **http://localhost:4000/blog/**
 .
 ├── _layouts/
 │   ├── default.html          # Base shell (head, nav, footer, translate widget)
-│   ├── home.html              # Homepage -- displays the latest post
+│   ├── home.html              # Homepage -- pinned intro + recent posts
 │   ├── post.html              # Single post with prev/next navigation
 │   └── posts.html             # Post listing with client-side search
 ├── _posts/                    # Blog posts (Markdown)
@@ -175,6 +175,7 @@ layout: post
 title: "Your Post Title"
 date: 2026-04-15 12:00:00 +0000
 description: "A brief one-sentence summary of your article."
+author: "Guest Author Name"
 ---
 ```
 
@@ -184,8 +185,8 @@ description: "A brief one-sentence summary of your article."
 | `title`       | Yes      | The article title. Wrap in quotes if it contains colons.    |
 | `date`        | Yes      | Publication date and time. Use `+0000` (UTC) for timezone.  |
 | `description` | Yes      | A short summary shown in post listings and SEO metadata.    |
-
-No additional front matter fields are required or expected.
+| `author`      | No       | Author name. Defaults to the site owner if omitted. **Guest contributors should set this.** |
+| `pinned`      | No       | Set to `true` to pin a post to the home page intro section. Only one post should be pinned. |
 
 ### Submitting a Pull Request
 
