@@ -17,7 +17,7 @@ layout: default
       <span class="post-author">{{ intro.author | default: site.author }}</span>
       <time datetime="{{ intro.date | date_to_xmlschema }}">{{ intro.date | date: "%d %b %Y" }}</time>
       {% assign intro_words = intro.content | number_of_words %}
-      {% assign intro_minutes = intro_words | divided_by: 200 %}
+      {% assign intro_minutes = intro_words | divided_by: 183 %}
       {% if intro_minutes < 1 %}{% assign intro_minutes = 1 %}{% endif %}
       <span class="reading-time">{{ intro_minutes }} min de leitura</span>
     </div>
@@ -43,7 +43,7 @@ layout: default
       <span class="post-author">{{ post.author | default: site.author }}</span>
       <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d %b %Y" }}</time>
       {% assign words = post.content | number_of_words %}
-      {% assign minutes = words | divided_by: 200 %}
+      {% assign minutes = words | divided_by: 183 %}
       {% if minutes < 1 %}{% assign minutes = 1 %}{% endif %}
       <span class="reading-time">{{ minutes }} min de leitura</span>
     </div>
