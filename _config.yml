@@ -3,6 +3,7 @@ description: "Um espaço para tirar as coisas de dentro."
 baseurl: "/blog"
 url: "https://filipes0usa.github.io"
 lang: pt
+author: "FilipeS0usa"
 
 # Build settings
 markdown: kramdown
