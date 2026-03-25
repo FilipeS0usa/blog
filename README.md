@@ -1,6 +1,6 @@
 # Notas de um Analgésico
 
-**A minimalist, dark-themed personal blog built with Jekyll 4.3 and deployed to GitHub Pages.**
+**A minimalist blog.**
 
 > *"Um espaco para tirar as coisas de dentro."*
 
@@ -212,7 +212,7 @@ author: "Guest Author Name"
 5. The CI pipeline will automatically build the site to verify there are no errors. Once reviewed and approved, your article will be merged and published.
 
 > **Guidelines:**
-> - The blog language is **Portuguese**. Articles should be written in Portuguese.
+> - The blog language is **Portuguese** but exceptions can be made for **English**.
 > - Keep the tone honest and personal -- this is not a corporate blog.
 > - Images are not currently supported in the blog layout. Text-only contributions are preferred.
 
