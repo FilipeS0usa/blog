@@ -781,6 +781,14 @@ main {
     margin-left: -0.75rem;
     margin-right: -0.75rem;
   }
+
+  .post-meta .post-author {
+    flex-basis: 100%;
+  }
+
+  .post-meta .post-author::after {
+    content: none;
+  }
 }
 
 /* ── Reduced motion ── */
