@@ -2,7 +2,7 @@
 layout: post
 title: "Porque ando de mota?"
 date: 2026-09-12 20:15:00 +0000
-description: "Um pequeno texto sobre o que a mota me da"
+description: "Um pequeno texto sobre a razão de ter começado a andar de mota e o que isso trouxe para a minha vida."
 author: "FilipeS0usa"
 pinned: false
 ---
