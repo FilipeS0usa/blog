@@ -4,7 +4,7 @@ title: "Porque ando de mota?"
 date: 2026-09-12 20:15:00 +0000
 description: "Um pequeno texto sobre o que a mota me da"
 author: "FilipeS0usa"
-pinned: true
+pinned: false
 ---
 
 # A razao deste post
